@@ -106,15 +106,23 @@ O projeto é desenvolvido utilizando a linguagem de programação Python e as se
 - matplotlib: Para a criação de visualizações gráficas, como as Curvas ROC.
 
 ## 📈 Resultados  
-*A preencher após as análises.*  
-Resumo visual e interpretativo dos principais achados.
+  ![Acuracia](https://github.com/user-attachments/assets/04f0d08e-b384-4382-8924-fc3d814582b6)
+  ![Precisao](https://github.com/user-attachments/assets/18d80afb-60ce-4738-b7e1-7b6e32c4c60b)
+  ![Recall](https://github.com/user-attachments/assets/e0f0022a-fa0a-4995-bf7b-f19cd7eaad21)
+  ![Especificidade](https://github.com/user-attachments/assets/42f12be6-2a70-4edd-89e2-dfd81f819907)
+  ![ROC](https://github.com/user-attachments/assets/9e99cda0-2ab2-40e8-acc7-8e4fd3e5ab53)
 
 ## 📌 Conclusões  
- Os modelos de boosting se mostraram os melhores para este dataset, sendo os mais promissores a se trabalhar com. É possível usar o GridSearchCV ou RandomizedSearchCV com parâmetros mais amplos ou refinados para melhorar o desempenho. Porém, devido ao tempo, o aumento pode ou não ser extremamente custoso, acabando por não valer a pena.
+  Este projeto de estatística aplicada teve como objetivo principal desenvolver modelos de Machine Learning capazes de prever o status de infecção por AIDS a partir de dados de pacientes. Através de um pipeline metodológico robusto, que incluiu a análise exploratória de dados, tratamento de features categóricas e numéricas, seleção de features via RFE e uma validação cruzada estratificada em 10 folds, conseguimos avaliar o desempenho de diversos algoritmos de classificação.
+
+  Os resultados demonstraram que modelos baseados em ensembles e boosting, como o GradientBoostingClassifier (AUC = 0.70), LightGBMClassifier (AUC = 0.68), RandomForestClassifier (AUC = 0.66) e XGBoostClassifier (AUC = 0.65), foram os que apresentaram o melhor poder discriminatório. Eles superaram significativamente os classificadores mais simples e o desempenho de um classificador aleatório (AUC = 0.50), indicando uma capacidade razoável de distinguir entre pacientes infectados e não infectados. Por outro lado, modelos como a Árvore de Decisão padrão (AUC = 0.55) e o SVC com kernel linear (AUC = 0.50) mostraram desempenho limitado, sugerindo que a complexidade da relação entre as features e o status de infecção não é linear ou não é bem capturada por abordagens mais simplistas.
+
+  O sucesso na identificação de modelos com bom poder preditivo, mesmo em um cenário de classes desbalanceadas, valida a importância da abordagem de pré-processamento adotada e da utilização de técnicas como class_weight e scale_pos_weight. Este estudo demonstra a viabilidade de utilizar dados clínicos e demográficos para auxiliar na classificação de pacientes com AIDS, o que pode ter implicações valiosas em pesquisas futuras e na tomada de decisões em saúde pública.
 
 ## ⚠️ Limitações e Trabalhos Futuros  
-*A preencher no final do projeto.*  
-Quais foram as limitações do estudo e o que poderia ser feito com mais tempo ou dados adicionais.
+  Embora o projeto tenha alcançado modelos com bom poder preditivo para a classificação de AIDS, algumas limitações e direções para trabalhos futuros podem ser exploradas:
 
----
-
+- Ajuste Fino de Hiperparâmetros: Ir além da busca básica, utilizando técnicas como Grid Search ou Randomized Search com espaços de parâmetros mais refinados, ou otimização bayesiana, para extrair o desempenho máximo dos modelos mais promissores (Gradient Boosting, LightGBM, Random Forest, XGBoost).
+- Exploração de Técnicas Avançadas de Balanceamento de Classes: Além de class_weight, investigar a aplicação de métodos de reamostragem como SMOTE (Synthetic Minority Over-sampling Technique) ou ADASYN no conjunto de treinamento de cada fold. Isso pode ajudar a melhorar ainda mais o Recall para a classe minoritária, sem comprometer significativamente a Precisão ou Especificidade.
+- Análise de Erros Aprofundada e Otimização de Limiares: Realizar uma análise mais detalhada dos Falsos Positivos e Falsos Negativos na matriz de confusão para os melhores modelos. Isso pode levar à otimização do limiar de classificação (decision threshold) para atender a necessidades específicas do domínio médico, onde o custo de um Falso Negativo (não identificar um paciente infectado) pode ser muito maior do que o de um Falso Positivo.
+- Engenharia de Features: Explorar a criação de novas features a partir das existentes (ex: proporções de CD4/CD8, variações ao longo do tempo se mais dados longitudinais estivessem disponíveis). Isso pode capturar relações não lineares e complexas que os modelos atuais podem não estar aproveitando ao máximo.
